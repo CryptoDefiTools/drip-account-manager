@@ -1,0 +1,37 @@
+{
+    "name": "drip-account-manager",
+    "title": "drip-account-manager",
+    "description": "This application will help you manage your drip accounts.",
+    "private": true,
+    "scripts": {
+        "dev": "next dev",
+        "build": "next build",
+        "start": "next start",
+        "lint": "next lint",
+        "prettier-check": "prettier --check .",
+        "prettier-fix": "prettier --write ."
+    },
+    "dependencies": {
+        "axios": "^0.24.0",
+        "next": "^12.0.7",
+        "react": "17.0.2",
+        "react-copy-to-clipboard": "^5.0.4",
+        "react-dom": "17.0.2",
+        "react-query": "^3.33.2",
+        "web3": "^1.6.0"
+    },
+    "devDependencies": {
+        "@nomiclabs/hardhat-ethers": "^2.0.2",
+        "@nomiclabs/hardhat-etherscan": "^2.1.7",
+        "@nomiclabs/hardhat-waffle": "^2.0.1",
+        "@openzeppelin/contracts": "^4.3.3",
+        "autoprefixer": "^10.4.0",
+        "eslint": "7.32.0",
+        "eslint-config-next": "12.0.3",
+        "ethers": "^5.5.1",
+        "hardhat": "^2.6.8",
+        "postcss": "^8.3.11",
+        "prettier": "^2.4.1",
+        "tailwindcss": "^2.2.19"
+    }
+}

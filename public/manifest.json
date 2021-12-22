@@ -1,0 +1,28 @@
+{
+    "short_name": "PMEIS",
+    "name": "Performance Monitoring and Evaluation Information System",
+    "icons": [
+        {
+            "src": "favicon.ico",
+            "sizes": "64x64 32x32 24x24 16x16",
+            "type": "image/x-icon"
+        },
+        {
+            "src": "favicon/android-chrome-192x192.png",
+            "type": "image/png",
+            "sizes": "192x192",
+            "purpose": "any maskable"
+        },
+        {
+            "src": "favicon/android-chrome-512x512.png",
+            "type": "image/png",
+            "sizes": "512x512"
+        }
+    ],
+    "orientation": "portrait",
+    "start_url": "/",
+    "display": "standalone",
+    "background_color": "#ffffff",
+    "theme_color": "#147CC1",
+    "prefer_related_applications": false
+}

@@ -1,0 +1,19 @@
+/* 
+ * Custom base (or global) styles 
+ *
+ * By using the '@layer' directive, Tailwind will automatically move those 
+ * styles to the same place/layer as '@tailwind base' to avoid unintended specificity issues.
+ */
+@tailwind base;
+
+@layer base {
+    input:checked + svg {
+        display: block;
+    }
+
+    @screen md {
+        iframe {
+            height: 100%;
+        }
+    }
+}

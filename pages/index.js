@@ -19,6 +19,7 @@ import { AddressDetailsComponent } from '../components/AddressDetailsComponent';
 import { RollComponent } from '../components/RollComponent';
 import { ClaimComponent } from '../components/ClaimComponent';
 import { SwapComponent } from '../components/SwapComponent';
+import Donate from '../components/Donate';
 
 function Dashboard(props) {
     const [web3, setWeb3] = useState();
@@ -244,7 +245,7 @@ function Dashboard(props) {
         <PageContainer>
             <Header title="DRIP Accounts Manager">
                 <div className="flex space-x-5 text-sm font-semibold">
-                    <div>BNB/DRIP ≈ ${numberFormat(bnbDripToUSDT, 2)} USDT</div>
+                    <div>BNB/DRIP ≈ 0.11782822339208508 / ${numberFormat(bnbDripToUSDT, 2)} USDT</div>
                     <div>BNB/USDT ≈ ${numberFormat(bnbToUSDT, 2)}</div>
                 </div>
             </Header>
@@ -473,6 +474,7 @@ function Dashboard(props) {
                                 })}
                             </tbody>
                         </table>
+                        <Donate/>
                     </div>
                 )}
             </div>

@@ -28,6 +28,7 @@ function Dashboard(props) {
     const [fountainContract, setFountainContract] = useState();
     const [dripTokenContract, setDripTokenContract] = useState();
     const [bnbDripToUSDT, setBnbDripToUSDT] = useState(0);
+    const [bnbDripRaw, setBnbDripRaw] = useState(0);
     const [bnbToUSDT, setBnbToUSDT] = useState(0);
     const [showFullAddress, setShowFullAddress] = useState(false);
     const [loading, setLoading] = useState(true);
@@ -131,6 +132,7 @@ function Dashboard(props) {
                 .getTokenToBnbInputPrice('1000000000000000000')
                 .call();
             // console.log(dripTokenToBnbPrice);
+            setBnbDripRaw(web3.utils.fromWei(dripTokenToBnbPrice))
 
             const dripToBNB =
                 web3.utils.fromWei(dripTokenToBnbPrice) * bnbToUSDT;
@@ -245,7 +247,8 @@ function Dashboard(props) {
         <PageContainer>
             <Header title="DRIP Accounts Manager">
                 <div className="flex space-x-5 text-sm font-semibold">
-                    <div>BNB/DRIP ≈ 0.11782822339208508 / ${numberFormat(bnbDripToUSDT, 2)} USDT</div>
+                    {/* <div>BNB/DRIP ≈ 0.11782822339208508 / ${numberFormat(bnbDripToUSDT, 2)} USDT</div> */}
+                    <div>BNB/DRIP ≈ {bnbDripRaw} / ${numberFormat(bnbDripToUSDT, 2)} USDT</div>
                     <div>BNB/USDT ≈ ${numberFormat(bnbToUSDT, 2)}</div>
                 </div>
             </Header>

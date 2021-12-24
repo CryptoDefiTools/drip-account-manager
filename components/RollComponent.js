@@ -39,7 +39,7 @@ export const RollComponent = (props) => {
                 receipt.transactionHash
             );
             if (transactionMined) {
-                console.log('final', result);
+                console.log('roll transaction mined!', transactionMined);
             }
         }
         setToggleRollButton(false);

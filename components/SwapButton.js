@@ -1,93 +1,75 @@
-// Sell DRIP for BNB
-
+import axios from 'axios';
+import { useMutation } from 'react-query';
 import cn from 'classnames';
 import Button from './Button';
 import Input from './Input';
-import Modal from './Modal';
+import Modal from './partials/Modal';
 import { useState } from 'react';
 import { useInput } from '../hooks/input-hook';
+import { toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import ellipsisInBetween from '../utils/ellipsisInBetween';
 
-export const SwapComponent = (props) => {
-    const { value: tokenSold, bind: bindTokenSold, setValue: setTokenSold } = useInput('');
-    const { value: slippage,  bind: bindSlippage, setValue: setSlippage } = useInput(3);
+export const SwapButton = (props) => {
+    const defaultSlippage = 1;
+    const { value: tokenSold, bind: bindTokenSold, setValue: setTokenSold } = useInput(0);
+    const { value: slippage, bind: bindSlippage, setValue: setSlippage } = useInput(defaultSlippage);
     const [isModalVisible, setIsModalVisible] = useState(false);
-    const [toggleRollButton, setToggleRollButton] = useState(false);
 
-    async function swap(address, tokenSold, slippage = 3) {
-        console.log('SWAP action for ', address);
-        setToggleRollButton(true);
+    const { address } = props.account;
 
-        const gasPrice = await props.web3.eth.getGasPrice();
-        const nonce = await props.web3.eth.getTransactionCount(address);
+    const {
+        isLoading,
+        mutateAsync,
+    } = useMutation(address => axios.get(`/api/actions/swap?address=${address}&slippage=${slippage}&tokenSold=${tokenSold}`), {
+        // retry: false,
+    });
 
-        const token_sold = tokenSold;
-        const dripTokenToBnbPrice = await props.fountainContract.methods
-            .getTokenToBnbInputPrice(props.web3.utils.toWei(token_sold))
-            .call();
-
-        const toBN = props.web3.utils.toBN;
-
-        const base1 = toBN(dripTokenToBnbPrice);
-        const base2 = base1.mul(toBN(90)).div(toBN(100)) // TAX
-        const base3 = base2.mul(toBN(100 - slippage)).div(toBN(100)) // 3% Slippage
-        const min_bnb = base3.toString();
-
-        console.log('token_sold', props.web3.utils.toWei(token_sold));
-        console.log('min_bnb:', min_bnb);
-
-        console.log('Estimate received:', props.web3.utils.fromWei(base2));
-        console.log('Minimum received:', props.web3.utils.fromWei(min_bnb));
-
-        const tx = props.fountainContract.methods.tokenToBnbSwapInput(
-            props.web3.utils.toWei(token_sold),
-            min_bnb
-        );
-        const gas = await tx.estimateGas({ from: address });
-        console.log('GAS: ', gas);
-        const data = tx.encodeABI();
-
-        const txData = {
-            from: address,
-            to: props.fountainContractAddress,
-            data,
-            gas,
-            gasPrice,
-            nonce,
-            chainId: 56,
-        };
-
-        // Commented out for testing purposes
-        const receipt = await props.web3.eth.sendTransaction(txData);
-        //const receipt = null;
-        console.log('swap receipt:', receipt);
-
-        if (receipt && receipt.transactionHash) {
-            const transactionMined = await props.web3.eth.getTransactionReceipt(
-                receipt.transactionHash
-            );
-            if (transactionMined) {
-                console.log('swap transaction mined!');
-            }
+    const notify = () => toast.promise(
+        () => mutateAsync(address),
+        {
+            pending: {
+                render() {
+                    return (<div>Swapping for <strong className="break-all">{ellipsisInBetween(address)}</strong></div>)
+                },
+            },
+            success: {
+                render() {
+                    return (<div>Swap successful for <strong className="break-all">{ellipsisInBetween(address)}</strong></div>)
+                },
+            },
+            error: {
+                render() {
+                    return (<div>Swap failed for <strong className="break-all">{ellipsisInBetween(address)}</strong></div>)
+                },
+            },
         }
-        setToggleRollButton(false);
-    }
+    )
+
+    const closeModal = () => {
+        setTokenSold(props.account.tokenBalance);
+        setSlippage(defaultSlippage);
+        setIsModalVisible(false);
+    };
 
     return (
         <>
             <Button
-                disabled={toggleRollButton}
+                disabled={isLoading}
                 className="text-xs px-2 py-1 hover:bg-gray-200"
-                onClick={() => setIsModalVisible(true)}
+                onClick={() => {
+                    if (props.account.tokenBalance) {
+                        setTokenSold(props.account.tokenBalance);   
+                    }
+                    
+                    setIsModalVisible(true);
+                }}
             >
                 Swap
             </Button>
             <Modal
                 visible={isModalVisible}
-                onClose={() => {
-                    setTokenSold('');
-                    setSlippage(3);
-                    setIsModalVisible(false);
-                }}
+                onClose={closeModal}
                 title="Swap"
             >
                 <div className="flex flex-col w-full pt-3 text-black space-y-5">
@@ -121,7 +103,7 @@ export const SwapComponent = (props) => {
                                 Slippage Tolerance: {slippage}%
                             </label>
                             <div className="w-full pt-2">
-                                <div className="grid grid-cols-6 xl:grid-cols-12 gap-2 w-full">
+                                <div className="space-x-2 w-full">
                                     <div className="inline-block radio">
                                         <Input
                                             {...bindSlippage}
@@ -184,19 +166,17 @@ export const SwapComponent = (props) => {
                                     </div>
                                 </div>
                             </div>
-
                         </div>
+
                         <div>
                             <Button
-                                disabled={toggleRollButton}
+                                disabled={isLoading}
                                 className="px-4 py-2 bg-blue-400 text-white hover:bg-blue-500 ml-auto"
                                 onClick={(e) => {
                                     e.stopPropagation();
-                                    if (
-                                        window.confirm('Are you sure you wish to Swap / Sell DRIP?')
-                                    ) {
-                                        swap(props.account.address, tokenSold, slippage);
-                                    }
+
+                                    notify();
+                                    closeModal();
                                 }}
                             >
                                 Swap

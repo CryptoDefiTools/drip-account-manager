@@ -28,6 +28,7 @@ export const DarkModeSwitch = () => {
         <div className="flex ml-auto">
             <div className="text-xs bg-gray-200 dark:bg-warm-gray-600 text-gray-500 dark:text-white leading-none border-2 border-gray-200 dark:border-gray-700 shadow-sm rounded-full inline-flex mx-auto">
                 <button
+                    title="Toggle Light Mode"
                     type="button"
                     onClick={() => toggleMode('light')}
                     className={cn(
@@ -53,6 +54,7 @@ export const DarkModeSwitch = () => {
                     </svg>
                 </button>
                 <button
+                    title="Toggle Dark Mode"
                     type="button"
                     onClick={() => toggleMode('dark')}
                     className={cn(

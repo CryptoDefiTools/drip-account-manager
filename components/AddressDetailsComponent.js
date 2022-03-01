@@ -14,11 +14,14 @@ export const AddressDetailsComponent = ({account, showFullAddress = false}) => {
                 </CopyToClipboard>
             </div>
 
-            <div className="flex space-x-8">
+            {/* <div className="flex space-x-8">
                 <span className="text-xs">
                     Wallet Level: {account.walletLevel}
                 </span>
-            </div>
+                <span className="text-xs">
+                    Roll Count: {account.rollCount}
+                </span>
+            </div> */}
         </div>
     );
 };

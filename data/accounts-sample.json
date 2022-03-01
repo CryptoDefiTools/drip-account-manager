@@ -4,14 +4,21 @@
     "accountname": "A",
     "address": "0x92409dEAEC5a7ba48625BE43B41ffC3d7d4E8FBe",
     "private": "0000000000000000000000000000000000000000000000000000000000000000",
-    "rollCount": 1
+    "rollCount": 1,
+    "botStrategy": "alternatingRollClaimSwapPercentageStrategy",
+    "thresholdPercentage": 1,
+    "rollClaimRatio": 2,
+    "rollClaimRatioCounter": 0
   },
   {
     "id": 2,
     "accountname": "B",
     "address": "0x99148fEb343A7D000B26396c134236E65bed70f0",
     "private": "0000000000000000000000000000000000000000000000000000000000000000",
-    "rollCount": 5
+    "rollCount": 5,
+    "botStrategy": "alternatingRollClaimStrategy",
+    "availableClaimDollarThreshold": 10,
+    "nextAction": "claim"
   },
   {
     "id": 3,

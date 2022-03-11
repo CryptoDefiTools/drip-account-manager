@@ -56,7 +56,7 @@ export const SwapButton = (props) => {
         <>
             <Button
                 disabled={isLoading}
-                className="text-xs px-2 py-1 hover:bg-gray-200"
+                className="table-action-button"
                 onClick={() => {
                     if (props.account.tokenBalance) {
                         setTokenSold(props.account.tokenBalance);   

@@ -11,7 +11,7 @@ const Donate = () => {
 
     return (
         <>
-            <div className="text-xs flex items-middle justify-end space-x-2 pt-3">
+            <div className="text-sm flex items-middle justify-end space-x-2 pt-3 pb-10">
                 <span>Show us some love: </span>
                 <span className="font-semibold">{address}</span>
                 <CopyToClipboard text={address} aria-label="Copy to Clipboard" className="focus:outline-none cursor-pointer hover:opacity-80">
@@ -20,7 +20,7 @@ const Donate = () => {
                     </button>
                 </CopyToClipboard>
                 <button onClick={() => setIsModalVisible(true)} title="Show QR">
-                    <QR className="w-4"/>
+                    <QR className="w-4" />
                 </button>
             </div>
             <Modal

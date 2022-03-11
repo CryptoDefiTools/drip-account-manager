@@ -6,7 +6,7 @@ export const AddressDetailsComponent = ({account, showFullAddress = false}) => {
     return (
         <div className="flex flex-col">
             <div className="flex space-x-2">
-                <span className="font-semibold">{showFullAddress ? account.address : ellipsisInBetween(account.address)}</span>
+                <span className="font-semibold text-sky-500 dark:text-blue-300">{showFullAddress ? account.address : ellipsisInBetween(account.address)}</span>
                 <CopyToClipboard text={account.address} aria-label="Copy to Clipboard" className="focus:outline-none cursor-pointer hover:opacity-80">
                     <button title="Copy to Clipboard">
                         <CopyIcon className="w-4" />

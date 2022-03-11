@@ -71,7 +71,7 @@ function PageContainer({ children, title = packageJson.title }) {
 
                 <title>{title}</title>
             </Head>
-            <main className="bg-gray-100 text-black dark:bg-gray-900 dark:text-white min-h-screen">
+            <main className="bg-gray-100 text-black dark:bg-black dark:text-white min-h-screen">
                 {children}
             </main>
         </>

@@ -26,7 +26,7 @@ export const DarkModeSwitch = () => {
 
     return (
         <div className="flex ml-auto">
-            <div className="text-xs bg-gray-200 dark:bg-warm-gray-600 text-gray-500 dark:text-white leading-none border-2 border-gray-200 dark:border-gray-700 shadow-sm rounded-full inline-flex mx-auto">
+            <div className="text-xs bg-gray-300 dark:bg-warm-gray-600 text-gray-500 leading-none border-2 border-gray-200 shadow-sm rounded-full inline-flex mx-auto">
                 <button
                     title="Toggle Light Mode"
                     type="button"
@@ -34,7 +34,7 @@ export const DarkModeSwitch = () => {
                     className={cn(
                         'inline-flex items-center transition-colors duration-100 ease-in focus:outline-none  rounded-full p-2',
                         {
-                            'bg-amber-400 text-white': mode === 'light',
+                            'bg-amber-400 text-black': mode === 'light',
                         }
                     )}
                 >

@@ -46,7 +46,7 @@ export const ClaimButton = props => {
         <>
             <Button
                 disabled={isLoading}
-                className="text-xs px-2 py-1 hover:bg-gray-200 disabled:opacity-50"
+                className="table-action-button"
                 onClick={(e) => {
                     e.stopPropagation();
 

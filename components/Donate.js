@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import CopyIcon from './Icons/Duplicate';
+import CopyIcon from './icons/Duplicate';
 import QRCode from 'react-qr-code';
 import QR from './icons/QR';
 import Modal from './partials/Modal';

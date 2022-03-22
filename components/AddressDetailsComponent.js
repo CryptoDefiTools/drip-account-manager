@@ -1,5 +1,5 @@
 import { CopyToClipboard } from 'react-copy-to-clipboard';
-import CopyIcon from './Icons/Duplicate';
+import CopyIcon from './icons/Duplicate';
 import ellipsisInBetween from '../utils/ellipsisInBetween';
 
 export const AddressDetailsComponent = ({account, showFullAddress = false}) => {

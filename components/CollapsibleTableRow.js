@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import cn from 'classnames';
-import ExpandIcon from './Icons/ChevronDown';
-import CollapseIcon from './Icons/ChevronUp';
+import ExpandIcon from './icons/ChevronDown';
+import CollapseIcon from './icons/ChevronUp';
 import Button from './Button';
 
 const CollapsibleTableRow = ({ rowkey, rowContent, actionsContent, collapsibleContent }) => {
